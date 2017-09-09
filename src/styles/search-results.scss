@@ -1,0 +1,16 @@
+@import './_variables.scss';
+
+.search-results-wrapper {
+    width: 100%;
+    // position: relative;
+    // padding: $pd-md;
+    // margin-top: $header-height;
+
+    .search-results {
+        width: 100%;
+    }
+
+    .search-results-more {
+        margin: 25px 0;
+    }
+}

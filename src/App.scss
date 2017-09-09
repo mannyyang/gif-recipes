@@ -1,0 +1,70 @@
+@import './styles/_variables.scss';
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    //padding: 20px;
+
+    .wrapper__center {
+        flex: 1;
+        & > .ui.text.container {
+            max-width: $bp-med !important;
+        }
+    }
+}
+
+.sticky-header {
+    position: relative;
+    // top: 0;
+    // left: 0;
+    width: 100%;
+    // height: $header-height;
+    padding: $pd-md;
+    background-color: white;
+    //border-bottom: 1px solid lightgrey;
+    z-index: $z-index-highest;
+}
+
+.search-bar {
+    padding-bottom: $pd-md;
+}
+
+.side-bar {
+    position: absolute;
+    z-index: $z-index-highest + 1;
+}
+
+.next-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe-dialog {
+    p {
+        white-space: pre-wrap;
+    }
+
+    video {
+        width: 100%;
+    }
+
+    .header {
+        color: white;
+    }
+}
+
+@import './styles/admin-page.scss';
+@import './styles/recipe-card.scss';
+@import './styles/search-results.scss';
+
+
