@@ -1,6 +1,6 @@
 import * as elasticsearch from 'elasticsearch-browser';
 const ESClient = new elasticsearch.Client({
-    host: 'localhost:9200',
+    host: process.env.NODE_ENV === 'production' ? 'http://quixcipes.com:9200' : 'http://localhost:9200',
     log: 'trace'
 });
 
