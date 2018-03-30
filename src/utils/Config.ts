@@ -1,6 +1,6 @@
 export const Opts = {
-    baseServiceUrl: process.env.NODE_ENV === 'production' ? 'http://quixcipes.com:9200/raw/recipe' : 'http://localhost:9200/raw/recipe',
-    processedServiceUrl: process.env.NODE_ENV === 'production' ? 'http://quixcipes.com:9200/processed/recipe' : 'http://localhost:9200/processed/recipe',
+    baseServiceUrl: 'https://search-quixcipes-u5h75uljnqooatmnakqcvn3npu.us-west-1.es.amazonaws.com/raw/recipe',
+    processedServiceUrl: 'https://search-quixcipes-u5h75uljnqooatmnakqcvn3npu.us-west-1.es.amazonaws.com/processed/recipe',
     query: {
         size: 12
     }
