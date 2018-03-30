@@ -8,9 +8,9 @@ import { Admin } from './Admin';
 import { Wrapper } from './Wrapper';
 import { Opts } from './utils/Config';
 
-import "./App.css";
+import './App.css';
 
-interface AppProps {
+interface IAppProps {
 
 }
 
@@ -26,8 +26,8 @@ const admin = () => (
     </div>
 );
 
-export default class App extends React.Component<AppProps, {}> {
-    constructor(props: AppProps) {
+export default class App extends React.Component<IAppProps, {}> {
+    constructor(props: IAppProps) {
         super(props);
     }
 
@@ -41,7 +41,7 @@ export default class App extends React.Component<AppProps, {}> {
                         <li><Link to="/Admin">Admin</Link></li>
                     </ul> */}
                     <div className="page-wrapper">
-                        <Route exact path="/" component={home} />
+                        <Route exact={true} path="/" component={home} />
                         <Route path="/admin" component={admin} />
                     </div>
                 </div>

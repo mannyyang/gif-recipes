@@ -1,43 +1,43 @@
 import * as elasticsearch from 'elasticsearch-browser';
 const ESClient = new elasticsearch.Client({
-    host: process.env.NODE_ENV === 'production' ? 'http://quixcipes.com:9200' : 'http://localhost:9200',
+    host: 'https://search-quixcipes-u5h75uljnqooatmnakqcvn3npu.us-west-1.es.amazonaws.com',
     log: 'trace'
 });
 
-interface SearchReqObj {
+interface ISearchReqObj {
     query: string;
     size: number;
     from: number;
     options?: any;
 }
 
-interface QueryObj {
+interface IQueryObj {
     query?: {
         bool?: {
             must?: Array<any>
         }
-    }
+    };
 }
 
-export function searchRecipes(searchReqObj: SearchReqObj): Promise<any> {
-    let queryObj: QueryObj = {};
+export function searchRecipes(searchReqObj: ISearchReqObj): Promise<any> {
+    let queryObj: IQueryObj = {};
 
     queryObj.query = {};
     queryObj.query.bool = {};
     queryObj.query.bool.must = [];
 
-    if (searchReqObj.options.title) { 
+    if (searchReqObj.options.title) {
         queryObj.query.bool.must = queryObj.query.bool.must.concat(
             searchReqObj.query.split(',').map(item => {
-                return { match: { title: item.trim() } }
+                return { match: { title: item.trim() } };
             })
         );
     }
 
-    if (searchReqObj.options.ingredients) { 
+    if (searchReqObj.options.ingredients) {
         queryObj.query.bool.must = queryObj.query.bool.must.concat(
             searchReqObj.query.split(',').map(item => {
-                return { match: { recipe: item.trim() } }
+                return { match: { recipe: item.trim() } };
             })
         );
     }

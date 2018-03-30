@@ -10,11 +10,11 @@ import * as debounce from 'lodash.debounce';
 import { Opts } from './utils/Config';
 import * as API from './utils/API';
 
-interface WrapperProps {
+interface IWrapperProps {
     size: number;
 }
 
-interface WrapperState {
+interface IWrapperState {
     recipes: any;
     isSearching: boolean;
     searchIndex: number;
@@ -25,14 +25,15 @@ interface WrapperState {
     options: any;
 }
 
-export class Wrapper extends React.Component<WrapperProps, WrapperState> {
-    vidEl: any;
-
-    static defaultProps: WrapperProps = {
+export class Wrapper extends React.Component<IWrapperProps, IWrapperState> {
+    static defaultProps: IWrapperProps = {
         size: Opts.query.size
     };
 
-    constructor(props) {
+    vidEl: any;
+    _search = debounce(this._handleSearchChange, 200);
+
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -54,9 +55,7 @@ export class Wrapper extends React.Component<WrapperProps, WrapperState> {
         this._getNextSet = this._getNextSet.bind(this);
     }
 
-    _search = debounce(this._handleSearchChange, 200);
-
-    _handleSearchChange(queryObj) {
+    _handleSearchChange(queryObj: any) {
         if (queryObj.value.length > 1) {
             this.setState({
                 isSearching: true,
@@ -85,9 +84,12 @@ export class Wrapper extends React.Component<WrapperProps, WrapperState> {
     }
 
     _handleNextClick() {
-        this.setState({
-            searchIndex: this.state.searchIndex + this.props.size
-        }, this._getNextSet);
+        this.setState(
+            {
+                searchIndex: this.state.searchIndex + this.props.size
+            },
+            this._getNextSet
+        );
     }
 
     _getNextSet() {
@@ -109,7 +111,7 @@ export class Wrapper extends React.Component<WrapperProps, WrapperState> {
             });
     }
 
-    _viewRecipe(recipe) {
+    _viewRecipe(recipe: any) {
         this.setState({
             currRecipe: recipe,
             isCurrRecipeOpen: true
@@ -131,7 +133,7 @@ export class Wrapper extends React.Component<WrapperProps, WrapperState> {
                         <SearchBar loading={this.state.isSearching} size="large" fluid={true} onChange={this._search} />
                         <SearchResults recipes={this.state.recipes} onExpandClick={this._viewRecipe} onNextClick={this._handleNextClick} />
                     </Container>
-                    <RecipeModal recipe={this.state.currRecipe} isOpen={this.state.isCurrRecipeOpen} onClose={this._closeRecipeDialog}/>
+                    <RecipeModal recipe={this.state.currRecipe} isOpen={this.state.isCurrRecipeOpen} onClose={this._closeRecipeDialog} />
                 </div>
             </div>
         );

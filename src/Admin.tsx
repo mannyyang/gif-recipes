@@ -14,7 +14,7 @@ interface IAdminProps {
 
 }
 
-interface recipe {
+interface IRecipe {
     title: string;
     id?: string;
     author?: string;
@@ -29,15 +29,14 @@ interface recipe {
     isProcessed: boolean;
 }
 
-
 interface IAdminState {
     currentPos: number;
-    currentRecipe: recipe;
-    modifiedRecipe: recipe;
+    currentRecipe: IRecipe;
+    modifiedRecipe: IRecipe;
 }
 
 export class Admin extends React.Component<IAdminProps, IAdminState> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -84,12 +83,11 @@ export class Admin extends React.Component<IAdminProps, IAdminState> {
                         size: 1,
                         from: this.state.currentPos
                     });
-                }
-                else {
+                } else {
                     return Promise.resolve(json);
                 }
             })
-            .then((json) => { 
+            .then((json) => {
                 this.setState({
                     currentRecipe: json.hits.hits[0]._source,
                     modifiedRecipe: json.hits.hits[0]._source
@@ -100,7 +98,7 @@ export class Admin extends React.Component<IAdminProps, IAdminState> {
             });
     }
 
-    _onFormChange(type, event) {
+    _onFormChange(type: any, event: any) {
         const updatedRecipe: any = {
             ...this.state.modifiedRecipe
         };
@@ -131,16 +129,15 @@ export class Admin extends React.Component<IAdminProps, IAdminState> {
                 console.log(type + ' type not available');
         }
 
-
         this.setState({
             modifiedRecipe: {
                 ...updatedRecipe,
                 isProcessed: true
             }
-        })
+        });
     }
 
-    _onSubmit(ev) {
+    _onSubmit(ev: any) {
         ev.preventDefault();
         ESClient.index({
             // opType: 'index',
@@ -170,64 +167,72 @@ export class Admin extends React.Component<IAdminProps, IAdminState> {
                             <Form onSubmit={this._onSubmit}>
                                 <Form.Field>
                                     <label>Timestamp</label>
-                                    <input placeholder='Timestamp' value={this.state.modifiedRecipe.timeStamp} disabled />
+                                    <input placeholder="Timestamp" value={this.state.modifiedRecipe.timeStamp} disabled={true} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Title</label>
-                                    <input placeholder='Title' value={this.state.modifiedRecipe.title} onChange={this._onFormChange.bind(this, 'title')} />
+                                    <input placeholder="Title" value={this.state.modifiedRecipe.title} onChange={this._onFormChange.bind(this, 'title')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>ID</label>
-                                    <input placeholder='ID' value={this.state.modifiedRecipe.id} disabled />
+                                    <input placeholder="ID" value={this.state.modifiedRecipe.id} disabled={true} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Tags</label>
-                                    <input placeholder='Tags' value={this.state.modifiedRecipe.tags ? this.state.modifiedRecipe.tags : ''} onChange={this._onFormChange.bind(this, 'tags')} />
+                                    <input placeholder="Tags" value={this.state.modifiedRecipe.tags ? this.state.modifiedRecipe.tags : ''} onChange={this._onFormChange.bind(this, 'tags')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Link</label>
-                                    <input placeholder='Link' value={this.state.modifiedRecipe.link} onChange={this._onFormChange.bind(this, 'link')} />
+                                    <input placeholder="Link" value={this.state.modifiedRecipe.link} onChange={this._onFormChange.bind(this, 'link')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Link Type</label>
-                                    <input placeholder='Link Type' value={this.state.modifiedRecipe.linkType} onChange={this._onFormChange.bind(this, 'linkType')} />
+                                    <input placeholder="Link Type" value={this.state.modifiedRecipe.linkType} onChange={this._onFormChange.bind(this, 'linkType')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Author</label>
-                                    <input placeholder='Author' value={this.state.modifiedRecipe.author} onChange={this._onFormChange.bind(this, 'author')} />
+                                    <input placeholder="Author" value={this.state.modifiedRecipe.author} onChange={this._onFormChange.bind(this, 'author')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Created At</label>
-                                    <input placeholder='Created At' disabled value={
-                                        this.state.modifiedRecipe.createdAt
-                                            ? moment(this.state.modifiedRecipe.createdAt, "YYYY-MM-DD HH:mm").toLocaleString()
-                                            : ''
-                                    } />
+                                    <input
+                                        placeholder="Created At"
+                                        disabled={true}
+                                        value={
+                                            this.state.modifiedRecipe.createdAt
+                                                ? moment(this.state.modifiedRecipe.createdAt, 'YYYY-MM-DD HH:mm').toLocaleString()
+                                                : ''
+                                    }
+                                    />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Modified At</label>
-                                    <input placeholder='Modified At' disabled value={
-                                        this.state.modifiedRecipe.modifiedAt
-                                            ? this.state.modifiedRecipe.modifiedAt.toString()
-                                            : ''
-                                    } />
+                                    <input
+                                        placeholder="Modified At"
+                                        disabled={true}
+                                        value={
+                                            this.state.modifiedRecipe.modifiedAt
+                                                ? this.state.modifiedRecipe.modifiedAt.toString()
+                                                : ''
+                                    }
+                                    />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Recipe</label>
-                                    <textarea placeholder='Recipe' value={this.state.modifiedRecipe.recipe} onChange={this._onFormChange.bind(this, 'recipe')} />
+                                    <textarea placeholder="Recipe" value={this.state.modifiedRecipe.recipe} onChange={this._onFormChange.bind(this, 'recipe')} />
                                 </Form.Field>
                                 <Form.Field>
                                     <label>Comments</label>
-                                    <textarea placeholder='Comments' value={JSON.stringify(this.state.modifiedRecipe.comments)} disabled />
+                                    <textarea placeholder="Comments" value={JSON.stringify(this.state.modifiedRecipe.comments)} disabled={true} />
                                 </Form.Field>
 
-                                <Button type='submit'>Update</Button>
-                                <Button type='button' onClick={this._reset}>Reset</Button>
+                                <Button type="submit">Update</Button>
+                                <Button type="button" onClick={this._reset}>Reset</Button>
                             </Form>
                         </Grid.Column>
-                        <Grid.Column>
+                        {/* <Grid.Column>
 
-                        </Grid.Column>
+                        </Grid.Column> */}
                     </Grid>
                 </div>
             </Segment>

@@ -8,21 +8,21 @@ import Bricks from 'bricks.js';
 import { RecipeCard } from './RecipeCard';
 import { Opts } from '../utils/Config';
 
-interface SearchResultsProps {
+interface ISearchResultsProps {
     recipes: Array<any>;
     onExpandClick: Function;
-    onNextClick: (event, data) => void;
+    onNextClick: (event: any, data: any) => void;
 }
 
-export class SearchResults extends React.Component<SearchResultsProps, {}> {
-    BricksLayout: any;
-
+export class SearchResults extends React.Component<ISearchResultsProps, {}> {
     static defaultProps = {
         recipes: [],
-        onExpandClick: () => { }
-    }
+        onExpandClick: () => { return ''; }
+    };
 
-    constructor(props) {
+    BricksLayout: any;
+
+    constructor(props: any) {
         super(props);
     }
 
@@ -36,11 +36,11 @@ export class SearchResults extends React.Component<SearchResultsProps, {}> {
                 { mq: '768px', columns: 3, gutter: 12 },
                 { mq: '1024px', columns: 3, gutter: 12 }
             ],
-            //position: false
+            // position: false
         });
 
         this.BricksLayout.resize(true);
-        //this.BricksLayout.pack();
+        // this.BricksLayout.pack();
     }
 
     componentWillReceiveProps() {
@@ -54,7 +54,8 @@ export class SearchResults extends React.Component<SearchResultsProps, {}> {
                     {
                         this.props.recipes && this.props.recipes.map(recipe => {
                             return (
-                                <RecipeCard key={recipe.id}
+                                <RecipeCard
+                                    key={recipe.id}
                                     recipe={recipe}
                                     onExpandClick={this.props.onExpandClick}
                                     onVideoLoaded={this.BricksLayout.pack}
@@ -65,9 +66,9 @@ export class SearchResults extends React.Component<SearchResultsProps, {}> {
                 </div>
                 <div className="search-results-more">
                     {
-                        this.props.recipes.length > 0 && this.props.recipes.length % Opts.query.size === 0 && //this.state.recipes.hasResults &&
-                        <Segment tertiary className="next-btn-container">
-                            <Button onClick={this.props.onNextClick} secondary content='Load More' icon='plus' labelPosition='right' />
+                        this.props.recipes.length > 0 && this.props.recipes.length % Opts.query.size === 0 && // this.state.recipes.hasResults &&
+                        <Segment tertiary={true} className="next-btn-container">
+                            <Button onClick={this.props.onNextClick} secondary={true} content="Load More" icon="plus" labelPosition="right" />
                         </Segment>
                     }
                 </div>

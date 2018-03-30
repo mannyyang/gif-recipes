@@ -2,9 +2,9 @@ import * as React from 'react';
 import {
     Input,
     Form
-} from 'semantic-ui-react'
+} from 'semantic-ui-react';
 
-interface SearchBarProps {
+interface ISearchBarProps {
     loading?: boolean;
     size?: any;
     fluid?: boolean;
@@ -12,40 +12,40 @@ interface SearchBarProps {
     onOptChange?: any;
 }
 
-interface SearchBarState {
+interface ISearchBarState {
     value: string;
     isIngreds: boolean;
     isTitle: boolean;
 }
 
-export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+export class SearchBar extends React.Component<ISearchBarProps, ISearchBarState> {
     static defaultProps = {
         loading: false,
         size: 'large',
         fluid: true,
-        onChange: () => { }
-    }
+        onChange: () => { return ''; }
+    };
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
             value: '',
             isIngreds: true,
             isTitle: false
-        }
+        };
 
         this._handleChange = this._handleChange.bind(this);
     }
 
-    _handleChange(event, data) {
+    _handleChange(event: any, data: any) {
         event.preventDefault();
-        
+
         let isIngreds = this.state.isIngreds;
         let isTitle = this.state.isTitle;
         let value = this.state.value;
 
-        if (data.type === 'checkbox') { 
+        if (data.type === 'checkbox') {
             switch (data.value) {
                 case 'ingredients':
                     isIngreds = data.checked;
@@ -53,27 +53,30 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                 case 'title':
                     isTitle = data.checked;
                     break;
-                
+                default:
+                    break;
             }
-        }
-        else if (data.type === 'text') { 
+        } else if (data.type === 'text') {
             value = data.value;
         }
 
-        this.setState({
-            isTitle: isTitle,
-            isIngreds: isIngreds,
-            value: value
-        }, () => { 
-            this.props.onChange({ ...this.state });
-        });
+        this.setState(
+            {
+                isTitle: isTitle,
+                isIngreds: isIngreds,
+                value: value
+            },
+            () => {
+                this.props.onChange({ ...this.state });
+            }
+        );
     }
 
     render() {
         const {
             isIngreds,
             isTitle
-         } = this.state;
+        } = this.state;
 
         return (
             <div className="search-bar">
@@ -88,7 +91,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                             onChange={this._handleChange}
                         />
                     </Form.Field>
-                    <Form.Group inline>
+                    <Form.Group inline={true}>
                         <label>Search by</label>
                         <Form.Checkbox label="Ingredients" value="ingredients" checked={isIngreds} onChange={this._handleChange} />
                         <Form.Checkbox label="Title" value="title" checked={isTitle} onChange={this._handleChange} />

@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react';
 
-interface StickyHeaderProps {
+interface IStickyHeaderProps {
     loading?: boolean;
     size?: any;
     fluid?: boolean;
     onChange?: any;
 }
 
-export class StickyHeader extends React.Component<StickyHeaderProps, {}> {
+export class StickyHeader extends React.Component<IStickyHeaderProps, {}> {
     static defaultProps = {
         loading: false,
         size: 'large',
         fluid: true,
-        onChange: () => { }
-    }
+        onChange: () => { return ''; }
+    };
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
     }
 
@@ -24,7 +24,7 @@ export class StickyHeader extends React.Component<StickyHeaderProps, {}> {
         return (
             <div className="sticky-header">
                 <div className="app-title">
-                    <Header as='h1' textAlign='center'>
+                    <Header as="h1" textAlign="center">
                         QuixCipes
                     </Header>
                 </div>
