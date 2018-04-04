@@ -59,3 +59,35 @@ export function searchRecipes(searchReqObj: ISearchReqObj): Promise<any> {
             return ex;
         });
 }
+
+export function getAllRawRecipes() {
+    return ESClient.search({
+        index: 'recipes',
+        type: 'raw',
+        size: 1000,
+        body: {
+            'query': { 'match_all': {} }
+        }
+    })
+        .then((response) => {
+            const filteredRecipes = response.hits.hits.map(item => {
+                return item._source;
+            });
+            return filteredRecipes;
+        }).catch(ex => {
+            return ex;
+        });
+}
+
+export function addToProcessed(recipe: any) {
+    return ESClient.index({
+        // opType: 'index',
+        index: 'recipes',
+        type: 'processed',
+        id: recipe.id,
+        body: {
+            ...recipe,
+            isProcessed: true
+        }
+    });
+}

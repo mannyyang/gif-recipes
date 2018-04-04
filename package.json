@@ -11,6 +11,7 @@
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
+    "react-data-grid": "^3.0.11",
     "react-dom": "^16.2.0",
     "react-masonry-component": "^5.0.7",
     "react-masonry-infinite": "^1.2.1",
