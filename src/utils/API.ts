@@ -43,8 +43,8 @@ export function searchRecipes(searchReqObj: ISearchReqObj): Promise<any> {
     }
 
     return ESClient.search({
-        index: 'raw',
-        type: 'recipe',
+        index: 'recipes',
+        type: 'raw',
         size: searchReqObj.size,
         from: searchReqObj.from,
         body: queryObj
