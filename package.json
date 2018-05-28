@@ -26,7 +26,8 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "sass": "node-sass src/App.scss src/App.css"
+    "sass": "node-sass src/App.scss src/App.css",
+    "start:prod": "http-server ./build"
   },
   "devDependencies": {
     "@types/react": "^16.0.38",
