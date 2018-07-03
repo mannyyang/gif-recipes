@@ -4,7 +4,6 @@ import {
     Route,
     // Link
 } from 'react-router-dom';
-import { Admin } from './Admin';
 import { Wrapper } from './Wrapper';
 import { Opts } from './utils/Config';
 
@@ -14,17 +13,7 @@ interface IAppProps {
 
 }
 
-const home = () => (
-    <div>
-        <Wrapper size={Opts.query.size}/>
-    </div>
-);
-
-const admin = () => (
-    <div>
-        <Admin />
-    </div>
-);
+const home = () => <Wrapper size={Opts.query.size} />;
 
 export default class App extends React.Component<IAppProps, {}> {
     constructor(props: IAppProps) {
@@ -32,18 +21,10 @@ export default class App extends React.Component<IAppProps, {}> {
     }
 
     render() {
-
         return (
             <Router>
-                <div>
-                    {/* <ul className="side-bar">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/Admin">Admin</Link></li>
-                    </ul> */}
-                    <div className="page-wrapper">
-                        <Route exact={true} path="/" component={home} />
-                        <Route path="/admin" component={admin} />
-                    </div>
+                <div className="page-wrapper">
+                    <Route exact={true} path="/" component={home} />
                 </div>
             </Router>
         );

@@ -91,10 +91,9 @@ export class RecipeCard extends React.Component<IRecipeCardProps, IRecipeCardSta
                                 <Loader active={true} />
                             </div>
                         }
-                        <video
-                            src={this.props.recipe.link || 'n/a'}
-                            ref={(el) => { this.vidEl = el; }}
-                        />
+                        <video ref={(el) => { this.vidEl = el; }}>
+                            <source src={this.props.recipe.link || 'n/a'} />
+                        </video>
                         <div className="card-header" title={this.props.recipe.title}>
                             <span className="card-title">
                                 {this.props.recipe.title}

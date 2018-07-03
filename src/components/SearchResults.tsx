@@ -52,7 +52,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
             <div className="search-results-wrapper">
                 <div className="search-results">
                     {
-                        this.props.recipes && this.props.recipes.map(recipe => {
+                        this.props.recipes ? this.props.recipes.map(recipe => {
                             return (
                                 <RecipeCard
                                     key={recipe.id}
@@ -61,7 +61,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
                                     onVideoLoaded={this.BricksLayout.pack}
                                 />
                             );
-                        })
+                        }) : []
                     }
                 </div>
                 <div className="search-results-more">

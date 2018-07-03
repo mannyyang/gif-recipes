@@ -75,10 +75,12 @@ export class Wrapper extends React.Component<IWrapperProps, IWrapperState> {
                     ingredients: queryObj.isIngreds
                 }
             })
-                .then(recipes => this.setState({
-                    recipes: recipes,
-                    isSearching: false
-                }))
+                .then(recipes => {
+                    this.setState({
+                        recipes: recipes.data,
+                        isSearching: false
+                    });
+                })
                 .catch(ex => this.setState({ isSearching: false }));
         }
     }
@@ -133,8 +135,8 @@ export class Wrapper extends React.Component<IWrapperProps, IWrapperState> {
                         <SearchBar loading={this.state.isSearching} size="large" fluid={true} onChange={this._search} />
                         <SearchResults recipes={this.state.recipes} onExpandClick={this._viewRecipe} onNextClick={this._handleNextClick} />
                     </Container>
-                    <RecipeModal recipe={this.state.currRecipe} isOpen={this.state.isCurrRecipeOpen} onClose={this._closeRecipeDialog} />
                 </div>
+                <RecipeModal recipe={this.state.currRecipe} isOpen={this.state.isCurrRecipeOpen} onClose={this._closeRecipeDialog} />
             </div>
         );
     }
