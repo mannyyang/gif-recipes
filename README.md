@@ -1,6 +1,7 @@
 # QuixCipes UI
 
 A TSX project for displaying scrapped web data from reddit's /r/GifRecipes.
+Currently hosted @ http://quixcipes.com/
 
 ## Getting Started
 
